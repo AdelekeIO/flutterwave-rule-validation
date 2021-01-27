@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://aio:4Zf9Rczks07X1VN3@cluster0-1hpps.mongodb.net/SUPERMRKET?retryWrites=true&w=majority",
+  "jwtSecret": "sl_myJwtSecret"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ruleValidationApi",
+  "version": "1.0.0",
+  "description": "Flutterwave test - Rule validation api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Adeleke Isaiah O",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
