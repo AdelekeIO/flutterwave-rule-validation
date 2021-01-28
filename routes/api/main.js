@@ -34,27 +34,38 @@ router.post("/validate-rule", async (req, res) => {
   }
 });
 
-const validate = (payload) => {
+const validate = async (payload) => {
   // Check if required field are supplied
-  let resp = hasFields(struct.inputRequiredFields, payload);
-  // console.log({ resp });
-
+  let resp = await hasFields(struct.inputRequiredFields, payload);
   if (resp == true && _.isBoolean(resp)) {
     // The rule field should be a valid JSON object and should contain the following required fields
-    let { rule } = payload;
+    let { rule, data } = payload;
     let { rule: ruleData } = struct;
-    console.log({ rule, ruleData });
     resp = _.isPlainObject(rule) ? true : ruleData.validJsonErrorMessage;
+    // console.log({ resp1: resp });
+
+    if (!_.isBoolean(resp)) return resp;
+    // Validate Rules
+    resp = await hasFields(ruleData, rule);
+    // console.log({ resp2: resp });
+    if (!_.isBoolean(resp)) return resp;
+
+    // validate data alongside field
+    let { field } = rule;
+    resp = _.hasIn(data, field) ? true : field + " is required in data";
 
     // _.isPlainObject(rule) &&
     return resp;
   } else return resp;
 };
 
-const hasFields = (fields, payload) => {
-  return fields.reduce((fb, v) => {
-    if (!_.hasIn(payload, v.field)) {
-      fb = v.message;
+const hasFields = async (fieldsParams, payload) => {
+  let { fields, fieldRequired } = fieldsParams;
+  // console.log({ fields });
+
+  return await fields.reduce((fb, v, ci, a) => {
+    if (_.hasIn(payload, v) == false || _.hasIn(payload, a[0]) == false) {
+      fb = !_.hasIn(payload, v) ? v + fieldRequired : a[0] + fieldRequired;
       return fb;
     } else return true;
   });
