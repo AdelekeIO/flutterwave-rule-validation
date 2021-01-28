@@ -1,0 +1,21 @@
+{
+  "response": {
+    "message": "My Rule-Validation API",
+    "status": "success",
+    "data": {}
+  },
+  "errorResponse": {
+    "message": "[field] is required.",
+    "status": "error",
+    "data": null
+  },
+  "inputRequiredFields": [
+    { "field": "data", "message": "The rule and data fields are required" },
+    { "field": "rule", "message": "The rule and data fields are required" }
+  ],
+  "rule": {
+    "fields": ["field", "condition", "condition_value"],
+    "validJsonErrorMessage": "rule is not a valid JSON object",
+    "fieldRequired": "rule[field] is required."
+  }
+}
