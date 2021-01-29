@@ -5,6 +5,6 @@ module.exports.clientErrorHandler = (err, req, res, next) => {
     let { errorResponse } = struct;
     errorResponse.message = "Invalid JSON payload passed.";
     console.error({ error: err.stack, errorResponse });
-    res.status(500).send(errorResponse);
+    res.status(400).send(errorResponse);
   } else next(err);
 };
