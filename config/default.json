@@ -1,17 +1,9 @@
 {
-  "jwtSecret": "sl_myJwtSecret",
   "myData": {
     "name": "Isaiah Olusegun Adeleke",
     "github": "@AdelekeIO",
     "email": "aisaiaholusegun@gmail.com",
     "mobile": "08102158778",
     "twitter": "@_iamaio"
-  },
-  "response": {
-    "message": "My Rule-Validation API",
-    "status": "success",
-    "data": {
-      "isValidForRule": true
-    }
   }
 }

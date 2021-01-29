@@ -11,11 +11,23 @@
   },
   "inputRequiredFields": {
     "fields": ["data", "rule"],
-    "fieldRequired": " is required"
+    "fieldRequired": " is required."
   },
   "rule": {
     "fields": ["field", "condition", "condition_value"],
-    "validJsonErrorMessage": "rule is not a valid JSON object",
+    "validJsonErrorMessage": "rule should be a object.",
     "fieldRequired": " is required."
+  },
+  "condition": {
+    "values": ["eq", "neq", "gt", "gte", "contains"]
+  },
+  "dataSuccessPayloadResp": {
+    "validation": {
+      "error": false,
+      "field": "[name of field]",
+      "field_value": "[value of field]",
+      "condition": "[rule condition]",
+      "condition_value": "[condition value]"
+    }
   }
 }
