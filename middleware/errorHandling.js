@@ -9,6 +9,7 @@ module.exports.clientErrorHandler = (err, req, res, next) => {
       res.status(400).send(errorResponse);
     } else next(err);
   } catch (error) {
+    //
     console.log("clientErrorHandler ===>", error);
   }
 };
