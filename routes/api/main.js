@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
 router.post("/validate-rule", async (req, res) => {
   let payload = req.body;
   let fb = await validate(payload);
-  console.log({ fb });
+  // console.log({ fb });
 
   if (fb == true && _.isBoolean(fb)) {
     let data = await conditionValidation(payload);
