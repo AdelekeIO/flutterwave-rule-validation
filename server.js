@@ -1,11 +1,9 @@
 const express = require("express");
-const path = require("path");
-const config = require("config");
-
 const app = express();
-
+const { clientErrorHandler } = require("./middleware/errorHandling");
 // Bodyparser Middleware
 app.use(express.json());
+app.use(clientErrorHandler);
 
 // Use Routes
 app.use("/", require("./routes/api/main"));
