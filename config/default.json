@@ -5,5 +5,17 @@
     "email": "aisaiaholusegun@gmail.com",
     "mobile": "08102158778",
     "twitter": "@_iamaio"
+  },
+  "inputRequiredFields": {
+    "fields": ["data", "rule"],
+    "fieldRequired": " is required."
+  },
+  "rule": {
+    "fields": ["field", "condition", "condition_value"],
+    "validJsonErrorMessage": "rule should be a object.",
+    "fieldRequired": " is required."
+  },
+  "condition": {
+    "values": ["eq", "neq", "gt", "gte", "contains"]
   }
 }

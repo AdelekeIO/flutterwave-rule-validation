@@ -3,17 +3,17 @@ const config = require("config");
 const router = express.Router();
 var _ = require("lodash");
 const me = config.get("myData");
-let struct = require("../../lib/constants.json");
 let { conditionValidation, validate } = require("../../lib/utility");
 
 // @route   GET /
 // @desc    First route is the base route. HTTP GET "/"
 // @access  Public
 router.get("/", (req, res) => {
-  struct.response.data = me;
-
-  let response = struct.response;
-  struct.response.message = "My Rule-Validation API";
+  let response = {
+    message: "My Rule-Validation API",
+    status: "success",
+    data: me,
+  };
   res.json(response);
 });
 
@@ -31,14 +31,21 @@ router.post("/validate-rule", async (req, res) => {
       let data = await conditionValidation(payload);
       let { message, status, statusCode, ...updatedData } = data;
 
-      struct.response.data.validation = updatedData;
-      struct.response.message = message;
-      struct.response.status = status;
-      let response = struct.response;
+      let response = {
+        message,
+        status,
+        data: {
+          validation: updatedData,
+        },
+      };
+
       res.status(statusCode).json(response);
     } else {
-      struct.errorResponse.message = fb;
-      let response = struct.errorResponse;
+      let response = {
+        message: fb,
+        status: "error",
+        data: null,
+      };
       res.status(400).json(response);
     }
   } catch (error) {
