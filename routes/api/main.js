@@ -23,12 +23,16 @@ router.get("/", (req, res) => {
 // @access  Public
 router.post("/validate-rule", async (req, res) => {
   let payload = req.body;
+  console.log("/validate-rule");
+
   let fb = await validate(payload);
   // console.log({ fb });
 
   if (fb == true && _.isBoolean(fb)) {
     let data = await conditionValidation(payload);
     let { message, ...updatedData } = data;
+    console.log({ message, updatedData });
+
     struct.response.data.validation = updatedData;
     struct.response.message = message;
     let response = struct.response;
