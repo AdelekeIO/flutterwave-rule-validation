@@ -22,25 +22,27 @@ router.get("/", (req, res) => {
 // @desc     Second route is the rule validation route. HTTP POST "/validate-rule""
 // @access  Public
 router.post("/validate-rule", async (req, res) => {
-  let payload = req.body;
-  // console.log("/validate-rule");
+  try {
+    let payload = req.body;
 
-  let fb = await validate(payload);
-  // console.log({ fb });
+    let fb = await validate(payload);
 
-  if (fb == true && _.isBoolean(fb)) {
-    let data = await conditionValidation(payload);
-    let { message, ...updatedData } = data;
-    // console.log({ message, updatedData });
+    if (fb == true && _.isBoolean(fb)) {
+      let data = await conditionValidation(payload);
+      let { message, status, statusCode, ...updatedData } = data;
 
-    struct.response.data.validation = updatedData;
-    struct.response.message = message;
-    let response = struct.response;
-    res.json(response);
-  } else {
-    struct.errorResponse.message = fb;
-    let response = struct.errorResponse;
-    res.status(400).json(response);
+      struct.response.data.validation = updatedData;
+      struct.response.message = message;
+      struct.response.status = status;
+      let response = struct.response;
+      res.status(statusCode).json(response);
+    } else {
+      struct.errorResponse.message = fb;
+      let response = struct.errorResponse;
+      res.status(400).json(response);
+    }
+  } catch (error) {
+    console.log("/validate-rule ===>", error);
   }
 });
 
